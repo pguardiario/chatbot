@@ -1,6 +1,10 @@
 "use client"
 
 import React, { useState, useRef, useEffect } from 'react';
+import Markdown from 'react-markdown'
+
+
+
 
 const ChatbotWidget = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -147,8 +151,9 @@ const ChatbotWidget = () => {
                   </svg>
                 </div>
               )}
-              <div className={`px-4 py-2 rounded-lg max-w-xs sm:max-w-sm break-words ${message.isBot ? 'bg-gray-100' : 'bg-blue-500 text-white'}`}>
-                {message.text}
+              <div className={`px-4 py-2 rounded-lg max-w-xs sm:max-w-sm md break-words ${message.isBot ? 'bg-gray-100' : 'bg-blue-500 text-white'}`}>
+              <Markdown>{message.text.replace(/https?:\/\/\S+/g, url => `[${url}](${url})`)}</Markdown>
+
               </div>
             </div>
           ))}

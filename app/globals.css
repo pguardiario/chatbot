@@ -120,3 +120,14 @@
     @apply bg-background text-foreground;
   }
 }
+
+.md a {
+  @apply underline text-blue-600
+}
+.md p {
+  @apply pb-2
+}
+
+.md li {
+  @apply ml-3 pb-0 list-disc
+}

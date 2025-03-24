@@ -30,7 +30,7 @@ export function DataTable({
       accessorKey: "product_name",
       header: "Name",
       // header: () => ( <div className="text-right w-10">Title</div> ),
-      // cell: ({ row }) => ( <div className="flex gap-2 items-center"> <span className="truncate w-100 font-medium"> {row.getValue("product_name")} </span> </div> ),
+      cell: ({ row }) => ( <div className="flex gap-2 items-center"> <span className="truncate font-medium"> {row.getValue("product_name")} </span> </div> ),
 
 
     },
