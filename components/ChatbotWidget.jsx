@@ -42,13 +42,58 @@ const ChatbotWidget = () => {
 
 
     try {
-      let answer = await fetch("https://rag-ai-tutorial.pguardiario.workers.dev/?text=" + encodeURI(inputValue)).then(r => r.text())
-      const botReply = {
-        id: messages.length + 2,
-        text: answer,
-        isBot: true
-      };
-      setMessages(prevMessages => [...prevMessages, botReply]);
+
+
+      let prevMessages = [...messages, userMessage]
+      let response = await fetch("https://rag-ai-tutorial.pguardiario.workers.dev/?text=" + encodeURI(inputValue))
+      let answer = ""
+
+      if (response.body) {
+        const reader = response.body.getReader();
+
+        const decoder = new TextDecoder('utf-8');
+
+        while (true) {
+          const { done, value } = await reader.read();
+
+          if (done) {
+            console.log('Stream complete.');
+            break;
+          }
+
+          const chunk = decoder.decode(value, { stream: true });
+          console.log({ done, value, chunk })
+          answer += JSON.parse(chunk.slice(6)).response;
+
+          const botReply = {
+            id: prevMessages.length + 2,
+            text: answer,
+            isBot: true
+          };
+          setMessages([...prevMessages, botReply]);
+        }
+
+      } else {
+        alert('ReadableStream not supported!');
+        answer = await response.text()
+        const botReply = {
+          id: prevMessages.length + 2,
+          text: answer,
+          isBot: true
+        };
+        setMessages([...prevMessages, botReply]);
+      }
+
+
+
+
+
+
+
+
+
+      // let answer = await fetch("https://rag-ai-tutorial.pguardiario.workers.dev/?text=" + encodeURI(inputValue)).then(r => r.text())
+
       setIsLoading(false);
 
     } catch (error) {
@@ -77,7 +122,7 @@ const ChatbotWidget = () => {
       </button>
 
       {/* Chat window */}
-      <div className={`mt-2 w-80 sm:w-96 bg-white rounded-lg shadow-xl flex flex-col transition-all duration-300 ${isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0 invisible'}`}>
+      <div className={`mt-2 w-80 sm:w-96 bg-white rounded-lg shadow-xl flex flex-col transition-all duration-300 ${isOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0 invisible'}`}>
         {/* Chat header */}
         <div className="px-4 py-3 bg-blue-500 text-white rounded-t-lg flex justify-between items-center">
           <h3 className="font-medium">Chat Support</h3>
@@ -89,7 +134,7 @@ const ChatbotWidget = () => {
         </div>
 
         {/* Messages container */}
-        <div className="flex-1 p-4 overflow-y-auto max-h-64">
+        <div className="flex-1 p-4 overflow-y-auto max-h-[calc(100vh-5rem)]">
           {messages.map((message) => (
             <div
               key={message.id}
