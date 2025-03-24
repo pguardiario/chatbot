@@ -10,16 +10,8 @@ import data from "@/components/data";
 
 export default function Home() {
   return (
-    <div className="container mx-auto px-32">
-      {/* <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
+    <div className="container mx-auto px-32 pt-4">
+      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
         <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
           <li className="mb-2 tracking-[-.01em]">
             Get started by editing{" "}
@@ -58,14 +50,14 @@ export default function Home() {
             Read our docs
           </a>
         </div>
-      </main> */}
+      </main>
       <div>
         <DataTable data={data}/>
       </div>
 
       <ChatbotWidget />
 
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
+      {/* <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
         <a
           className="flex items-center gap-2 hover:underline hover:underline-offset-4"
           href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
@@ -111,7 +103,7 @@ export default function Home() {
           />
           Go to nextjs.org →
         </a>
-      </footer>
+      </footer> */}
     </div>
   );
 }

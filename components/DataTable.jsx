@@ -56,6 +56,11 @@ export function DataTable({
     columns,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
+    initialState: {
+      pagination: {
+          pageSize: 30,
+      },
+  },
   })
 
   return (
