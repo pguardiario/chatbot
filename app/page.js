@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button"
 import { DataTable } from "@/components/DataTable";
 import data from "@/components/data";
+import Header from "@/components/Header";
 
 
 
@@ -11,6 +12,7 @@ import data from "@/components/data";
 export default function Home() {
   return (
     <div className="container mx-auto px-32">
+      <Header/>
       <main className="w-full">
 
 

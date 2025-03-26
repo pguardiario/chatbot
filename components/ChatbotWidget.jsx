@@ -57,6 +57,8 @@ const ChatbotWidget = () => {
 
         const decoder = new TextDecoder('utf-8');
 
+        setIsLoading(false);
+
         while (true) {
           const { done, value } = await reader.read();
 
